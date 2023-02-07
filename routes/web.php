@@ -21,6 +21,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
+//Route::get('/home', 'HomeController@index')->name('home');
+
 
 Route::middleware('auth')
     ->namespace('Admin')
@@ -30,7 +32,3 @@ Route::middleware('auth')
         Route::get('/', 'PageController@dashboard')->name('dashboard');
         Route::resource('posts', 'PostController');
     });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
