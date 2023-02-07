@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Schema\PostgresBuilder;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::middleware('auth')->namespace('Admin')->name('admin.')->prefix('admin')->group(function () {
-    Route::get('/home', 'HomeController@index')->name('home');
-    Route::resource('post', 'PostController');
-});
+
+Route::middleware('auth')
+    ->namespace('Admin')
+    ->name('admin.')
+    ->prefix('admin')
+    ->group(function () {
+        Route::get('/', 'PageController@dashboard')->name('dashboard');
+        Route::resource('posts', 'PostController');
+    });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
